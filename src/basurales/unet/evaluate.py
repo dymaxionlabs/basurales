@@ -3,7 +3,7 @@ from glob import glob
 
 import matplotlib.pyplot as plt
 
-from meduy.unet.train import build_data_generator
+from basurales.unet.train import build_data_generator
 
 
 def plot_data_generator(num_samples=3, fig_size=(20, 10), *, train_config):

@@ -17,10 +17,13 @@ from keras.layers import (BatchNormalization, Conv2D, Conv2DTranspose, Dropout,
 from keras.models import Model
 from keras.optimizers import Adam
 from keras.metrics import MeanIoU
-from meduy.utils import resize
+from basurales.utils import resize
 from sklearn.preprocessing import minmax_scale
 
 warnings.filterwarnings('ignore', category=UserWarning, module='skimage')
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+tf.keras.backend.set_session(tf.Session(config=config))
 
 
 @attr.s
@@ -43,7 +46,7 @@ class TrainConfig:
 
 def build_model(cfg):
     # NOTE: for now, classes are equally balanced
-    class_weights = [0.5 for _ in range(cfg.n_classes)]
+    class_weights = [0.2 for _ in range(cfg.n_classes)]
 
     growth_factor = 2
     n_filters_start = 32
@@ -171,21 +174,30 @@ def build_model(cfg):
                                  axis=[0, 1, 2])
         return K.sum(class_loglosses * K.constant(class_weights))
 
+    
+    def iou(y_true, y_pred):
+       
+
+        I = tf.reduce_sum(y_pred * y_true, axis=(1, 2))
+        U = tf.reduce_sum(y_pred + y_true, axis=(1, 2)) - I
+        return tf.reduce_mean(I / U)
+        
+   
     def mean_iou(y_true, y_pred):
         prec = []
-        nb_classes = K.int_shape(y_pred)[-1]
         for t in np.arange(0.5, 1.0, 0.05):
             y_pred_ = tf.to_int32(y_pred > t)
-            score, up_opt = tf.metrics.mean_iou(y_true, y_pred_, nb_classes)
+            score, up_opt = tf.metrics.mean_iou(y_true, y_pred_,2)
             K.get_session().run(tf.local_variables_initializer())
             with tf.control_dependencies([up_opt]):
                 score = tf.identity(score)
             prec.append(score)
         return K.mean(K.stack(prec), axis=0)
+        
 
     model.compile(optimizer=Adam(),
                   loss=weighted_binary_crossentropy,
-                  metrics=['accuracy', mean_iou])
+                  metrics=['accuracy', iou,mean_iou])
 
     return model
 
@@ -217,6 +229,8 @@ def preprocess_input(image, mask, *, config):
     # make sure mask has shape (H, W, 1) and not (H, W).
     mask_ = mask_.reshape(mask_.shape[0], mask_.shape[1], config.n_classes)
 
+    #image_ = np.nan_to_num(image_)
+    
     return image_, mask_
 
 
@@ -253,7 +267,7 @@ def build_data_generator(image_files, *, config, mask_dir):
         batch_paths = np.random.choice(a=image_files, size=config.batch_size)
         batch_input = []
         batch_output = []
-
+        
         # Read in each input, perform preprocessing and get labels
         for input_path in batch_paths:
             input = get_raster(input_path, n_channels=config.n_channels)
@@ -264,10 +278,13 @@ def build_data_generator(image_files, *, config, mask_dir):
             input, mask = preprocess_input(image=input,
                                            mask=mask,
                                            config=config)
+            if not np.any(np.isnan(input)):
+                if not np.any(np.isnan(mask)):#could be better
 
-            batch_input.append(input)
-            batch_output.append(mask)
-
+                    batch_input.append(input)
+                    batch_output.append(mask)
+                
+        
         # Return a tuple of (input, output) to feed the network
         batch_x = np.array(batch_input)
         batch_y = np.array(batch_output)

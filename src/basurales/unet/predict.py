@@ -5,9 +5,9 @@ from glob import glob
 import attr
 import numpy as np
 import rasterio
-from meduy.unet.train import TrainConfig, build_model
-from meduy.unet.utils import load_model
-from meduy.utils import grouper, resize
+from basurales.unet.train import TrainConfig, build_model
+from basurales.unet.utils import load_model
+from basurales.utils import grouper, resize
 from sklearn.preprocessing import minmax_scale
 from tqdm import tqdm
 
