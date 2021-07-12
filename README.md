@@ -23,11 +23,11 @@ Este repositorio contiene un conjunto de notebooks de Jupyter, que describen los
 3. [Predicción](notebooks/3_Prediccion.ipynb): Predicción sobre la región de interés.
 4. [Post Procesamiento](notebooks/4_Post-procesamiento.ipynb): Procesamiento de los resultados de la predicción.
 
-## :handshake: Contributing
+## :handshake: Contribuciones
 
 Reportes de bugs y *pull requests* pueden ser reportados en la [página de issues](https://github.com/dymaxionlabs/basurales) de este repositorio. Este proyecto está destinado a ser un espacio seguro y acogedor para la colaboración, y se espera que los contribuyentes se adhieran al código de conducta [Contributor
 Covenant](http://contributor-covenant.org).
 
-## :page_facing_up: License
+## :page_facing_up: Licencia
 
 El código está licenciado bajo Apache 2.0. Refiérase a [LICENSE.txt](LICENSE.txt).
