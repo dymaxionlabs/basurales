@@ -18,12 +18,7 @@ Se utilizan las herramientas **GDAL** y [Orfeo Toolbox](https://www.orfeo-toolbo
 
 Este repositorio contiene un conjunto de notebooks de Jupyter, que describen los pasos necesarios:
 
-1. [Pre-process](1_Pre-process.ipynb): Image and ground truth data preprocessing and dataset generation
-2. [Training](2_Training.ipynb): Model training and evaluation
-3. [Prediction](3_Prediction.ipynb): Prediction
-4. [Post-process](4_Post-process.ipynb): Post-processing of prediction results
-
-* [Pre-procesamiento](notebooks/1_Preprocesamiento.ipynb): Se procesan las imágenes satelitales y la verdad de campo para generar el dataset de entrenamiento y de predicción del modelo.
-* [Entrenamiento](notebooks/2_Entrenamiento.ipynb): Entrenamiento y evaluación del modelo.
-* [Predicción](notebooks/3_Prediccion.ipynb): Predicción sobre la región de interés.
-* [Post Procesamiento](notebooks/4_Post-procesamiento.ipynb): Procesamiento de los resultados de la predicción.
+1. [Pre-procesamiento](notebooks/1_Preprocesamiento.ipynb): Se procesan las imágenes satelitales y la verdad de campo para generar el dataset de entrenamiento y de predicción del modelo.
+2. [Entrenamiento](notebooks/2_Entrenamiento.ipynb): Entrenamiento y evaluación del modelo.
+3. [Predicción](notebooks/3_Prediccion.ipynb): Predicción sobre la región de interés.
+4. [Post Procesamiento](notebooks/4_Post-procesamiento.ipynb): Procesamiento de los resultados de la predicción.
