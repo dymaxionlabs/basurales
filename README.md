@@ -2,9 +2,9 @@
 
 ## Descripción
 
-Los basurales a cielo abierto son aquellos donde los residuos se disponen de forma indiscriminada y con escasas medidas de protección ambiental. Esto es un problema en diferentes áreas, no sólo a nivel ecológico ambiental sino también a nivel sociedad, salud, y urbanización regulada.
+Los basurales a cielo abierto son aquellos donde los residuos se disponen de forma indiscriminada y con escasas medidas de protección ambiental. 
 
-Este proyecto tiene por objetivo la detección y seguimiento de los basurales a cielo abierto, aplicando técnicas basadas en machine learning (ML) para el procesamiento de imágenes satelitales. Esto permite mapear grandes áreas de manera rápida y con bajos recursos.
+Este proyecto, desarrollado en conjunto entre Dymaxion Labs y la [Fundación Bunge & Born](https://www.fundacionbyb.org/), tiene por objetivo la detección y seguimiento de los basurales a cielo abierto, aplicando técnicas basadas en machine learning (ML) para el procesamiento de imágenes satelitales. Esto permite mapear grandes áreas de manera rápida y con bajos recursos.
 
 ![](img_readme/A.png)![](img_readme/B.png)
 
